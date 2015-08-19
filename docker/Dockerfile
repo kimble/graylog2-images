@@ -35,4 +35,11 @@ EXPOSE 4001
 EXPOSE 514
 EXPOSE 514/udp
 
-CMD ["/opt/graylog/embedded/share/docker/my_init"]
+ADD init.sh /opt/init.sh
+
+RUN [ "mkdir", "/tmp/content-packs" ] 
+ADD install-content-packs.sh /opt/install-content-packs.sh
+
+ADD content-packs/*.json /tmp/content-packs/
+
+CMD ["/opt/init.sh"]
